@@ -177,8 +177,50 @@ $ فايدة الفالديشن اني اكتش الايرور بدري
 
 //-------------------------
 
+/* // TODO: add Eslint => علشان يكتشف الاخطاء البسيطة
+// 1- Install these packages in your dev dependencies using this command:
+
+npm i -D eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-node eslint-plugin-prettier eslint-plugin-react prettier
+
+
+// 2- Create ".eslintrc.json" file in the root directory with these configration: 
+
+{
+  "extends": ["airbnb", "prettier", "plugin:node/recommended"],
+  "plugins": ["prettier"],
+  "rules": {
+    // "prettier/prettier": "error",
+    "spaced-comment": "off",
+    "no-console": "off",
+    "consistent-return": "off",
+    "func-names": "off",
+    "object-shorthand": "off",
+    "no-process-exit": "off",
+    "no-param-reassign": "off",
+    "no-return-await": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "no-undef": "warn",
+    "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "req|res|next|val" }]
+  }
+}
+ */
+
 /* //HEADLINE: Sub Categoury and Brands
  * models/subCategoryModel.js:
-require mongoose
-create schema and add definishn timestamps
+-require mongoose
+-create schema and add requirement, slug and timestamps and make it child => ref
+- in controleers/subCategoryController.js : 
+require slugify, express-async-handler, utils/apiError and subCategory
+add craete subCategory
+- in route/subCategoryRoute.js:
+require express, createSubCategory from controler
+const router = express.Router();
+router.route("/").post(createSubCategory);
+- create validation
+- require it in subCategoryRoute.js
+- mount it in server.js
+- test it in postman : create new folder for subCategory
+- then get , getspicifc , update and delete
  */
