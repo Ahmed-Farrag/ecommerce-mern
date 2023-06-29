@@ -1,7 +1,7 @@
 const slugify = require("slugify");
 const CategoryModel = require("../models/categoryModel");
 const asyncHandler = require("express-async-handler");
-
+const ApiError = require("../utils/apiError");
 /**
  *  @desc  get list of categories
  *  @route Get  /api/categories
@@ -22,11 +22,11 @@ exports.getCategories = asyncHandler(async (req, res) => {
  *  @route Get api=categories/:id
  *  @access Public
  */
-exports.getSpecificCategoryById = asyncHandler(async (req, res) => {
+exports.getSpecificCategoryById = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const category = await CategoryModel.findById(id);
   if (!category) {
-    res.status(404).json({ msg: `No Category for this id ${id}` });
+    return next(new ApiError(`No Category for this id ${id}`, 404));
   }
   res.status(200).json({ data: category });
 });
@@ -47,7 +47,7 @@ exports.createCategory = asyncHandler(async (req, res) => {
  * @route PUT api/categories/:id
  * @access private
  */
-exports.updateCategory = asyncHandler(async (req, res) => {
+exports.updateCategory = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const { name } = req.body;
 
@@ -57,7 +57,7 @@ exports.updateCategory = asyncHandler(async (req, res) => {
     { new: true }
   );
   if (!category) {
-    res.status(404).json({ msg: `No Category for this id ${id}` });
+    return next(new ApiError(`No Category for this id ${id}`, 404));
   }
   res.status(200).json({ data: category });
 });
@@ -67,11 +67,11 @@ exports.updateCategory = asyncHandler(async (req, res) => {
  * @route DELETE api/categories/:id
  * @access private
  */
-exports.deleteCategory = asyncHandler(async (req, res) => {
+exports.deleteCategory = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const category = await CategoryModel.findOneAndDelete(id);
   if (!category) {
-    res.status(404).json({ msg: `No Category for this id ${id}` });
+    return next(new ApiError(`No Category for this id ${id}`, 404));
   }
-  res.status(204).send();
+  res.status(200).send("deleted");
 });
