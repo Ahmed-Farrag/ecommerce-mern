@@ -3,6 +3,12 @@ const asyncHandler = require("express-async-handler");
 const ApiError = require("../utils/apiError");
 const subCategoryModel = require("../models/subCategoryModel");
 
+exports.setCategoryIdToBody = (req, res, next) => {
+  // Nested route
+  if (!req.body.category) req.body.category = req.params.categoryId;
+  next();
+};
+
 /**
  *  @desc  Create subcategory
  *  @route Post  /api/subSubCategory
@@ -18,6 +24,16 @@ exports.createSubCategory = asyncHandler(async (req, res) => {
   res.status(201).json({ data: subcategory });
 });
 
+// Nested Route
+// GET /api/categories/:category
+
+exports.createFiterObject = (req, res, next) => {
+  let filterObject = {};
+  if (req.params.categoryId) filterObject = { category: req.params.categoryId };
+  req.filterObject = filterObject;
+  next();
+};
+
 /**
  *  @desc  get list of subCategory
  *  @route Get  /api/subCategory
@@ -28,8 +44,13 @@ exports.getSubCategory = asyncHandler(async (req, res) => {
   const page = req.query.page * 1 || 1;
   const limit = req.query.limit * 1 || 5;
   const skip = (page - 1) * limit;
+
   //logic
-  const subCategory = await subCategoryModel.find({}).skip(skip).limit(limit);
+  const subCategory = await subCategoryModel
+    .find(req.filterObject)
+    .skip(skip)
+    .limit(limit);
+  // .populate({ path: "category", select: "name -_id" });
   res
     .status(200)
     .json({ results: subCategory.length, page, data: subCategory });
@@ -43,6 +64,7 @@ exports.getSubCategory = asyncHandler(async (req, res) => {
 exports.getSpecificSubCategoryById = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const subCategory = await subCategoryModel.findById(id);
+
   if (!subCategory) {
     return next(new ApiError(`No subCategory for this id ${id}`, 404));
   }

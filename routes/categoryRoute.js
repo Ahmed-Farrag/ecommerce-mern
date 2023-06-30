@@ -16,6 +16,10 @@ const {
   createCategoryValidator,
 } = require("../utils/validators/categoryValidator");
 
+const subCategoriesRoute = require("./subCategoryRoute");
+
+router.use("/:categoryId/subCategories", subCategoriesRoute);
+
 // routes
 router
   .route("/")

@@ -223,4 +223,29 @@ router.route("/").post(createSubCategory);
 - mount it in server.js
 - test it in postman : create new folder for subCategory
 - then get , getspicifc , update and delete
+$ make population : اني ارجع الاب باسمة مع الابن مش بالاي دي
+in controllers/subCategoryController.js => .populate({path: "category", select: 'name'});
+.populate({path: "category", select: 'name -_id'}); => معناه كدا بقولة شيلي الايدي
+
+$ Nested Route : access route from anther route
+* اي حاجة بيرنت وليها ابناء
+*list of subcategory - give him categoryId and give me list
+*GET  /api/categories/:categoryId/subCategories   => هاتلي الساب كاتيجوري اللي تنتمي للكاتجوري الفلاني
+- in routes/categoryRoute.js:
+const subCategoriesRoute = require("./subCategoryRoute");
+router.use("/:categoryId/subCategories", subCategoriesRoute)
+-in subCategoryRoute.js:
+* mergeParams: allow us to access parameters on other routers
+ex: we need to access categoryId from category router
+const router = express.Router({mergeParams: true});
+and make logic in controllerss/subCategoryController.js: in getSubCategory method
+create it like middleware => exports.createFiterObject
+
+-create subcategory on category:
+in subcategorycontroller.js: create it like middleware
+exports.setCategoryIdToBody 
+if didnt have category in body catch it from params.categoryId
+and add it after validation
+
+- CRUD Operation for Brands
  */
