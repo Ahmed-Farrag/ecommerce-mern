@@ -247,5 +247,10 @@ exports.setCategoryIdToBody
 if didnt have category in body catch it from params.categoryId
 and add it after validation
 
-- CRUD Operation for Brands
+- CRUD Operation for Brands => copy past to category
+*models/brandModel.js
+*utils/validators/brandValidators.js
+*controllers/brandController.js
+*routes/brandRoute.js
+*make mount
  */
