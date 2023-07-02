@@ -265,4 +265,15 @@ and add it after validation
 
  $vaidate category in our db
  in utils/validator/productValidator.js : create custome for category and subcategory
+ اعمل فاليديت ان الكاتيجوري والسابكاتيجوري موجوده في الداتا بيز قبل مضيف البرودكت
+
+ *validate subCategory belong to category  => anther custom , checker -  تنتمي ولا لا 
+
+ * insert&delete to dummyData:  علشان اضيف منتجات تجريبية علشان اوفر وقت
+ seeder.js: require fs 
+ npm i colors => require it   ==> to make color to log
+ require dotenv , productModel and dbConnection
+ then connect to DB and Read data
+ then insert data method and delete data method
+ to run it => node seeder.js  condition to run it
  */
