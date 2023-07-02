@@ -254,3 +254,15 @@ and add it after validation
 *routes/brandRoute.js
 *make mount
  */
+
+/* //HEADLINE: Product CRUD
+ *models/productModel.js : create schema - and create ref to category, subcategory and brand
+ *controllers/productController.js : just change => req.body.slug = slugify(req.body.title); and populate
+ *utils/validators/productValidator.js
+ *routes/productRoute.js
+ *server.js => mount
+ *test=> postman
+
+ $vaidate category in our db
+ in utils/validator/productValidator.js : create custome for category and subcategory
+ */

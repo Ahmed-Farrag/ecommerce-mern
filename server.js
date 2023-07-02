@@ -11,6 +11,7 @@ const ApiError = require("./utils/apiError");
 const globalError = require("./middlewares/errorMiddleware");
 const subCategoryRoute = require("./routes/subCategoryRoute");
 const brandRoute = require("./routes/brandRoute");
+const productRoute = require("./routes/productRoute");
 
 // connect with db
 dbConnection();
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/categories", categoryRoute);
 app.use("/api/subcategories", subCategoryRoute);
 app.use("/api/brands", brandRoute);
+app.use("/api/products", productRoute);
 
 app.all("*", (req, res, next) => {
   //create error and send it to error handling middleware
