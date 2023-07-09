@@ -2,6 +2,7 @@ const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
 const BrandModel = require("../models/brandModel");
 const ApiError = require("../utils/apiError");
+const apiFeatuers = require("../utils/apiFeatuers");
 /**
  *  @desc  get list of brands
  *  @route Get  /api/brands

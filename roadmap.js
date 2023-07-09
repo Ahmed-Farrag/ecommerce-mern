@@ -101,6 +101,7 @@ npm install express-async-handler
 
 // Handle get all category from db
 // Then make pagenation => ?page=1&limit=1 => in categouryController.js
+
 // getSpecificCategory method & create it in categoryRoute & save in postman
 // update category method & create it in categoryRoute & save in postman
 // delete category method & create it in categoryRoute & save in postman
@@ -251,6 +252,15 @@ and add it after validation
 *models/brandModel.js
 *utils/validators/brandValidators.js
 *controllers/brandController.js
+exports.getBrands = asyncHandler(async (req, res) => {
+  // pagination
+  const page = req.query.page * 1 || 1;
+  const limit = req.query.limit * 1 || 5;
+  const skip = (page - 1) * limit;
+  //logic
+  const brands = await BrandModel.find({}).skip(skip).limit(limit);
+  res.status(200).json({ results: brands.length, page, data: brands });
+});
 *routes/brandRoute.js
 *make mount
  */
@@ -275,5 +285,102 @@ and add it after validation
  require dotenv , productModel and dbConnection
  then connect to DB and Read data
  then insert data method and delete data method
- to run it => node seeder.js  condition to run it
+  condition to run it
+ run it => cd utils/dummyData
+ >node seeder.js -d
+ >node seeder.js -i
+
+ HEADLINE: FILTRATION
+ $ products filtration by =
+ by price and ratingAvrge
+ * http://localhost:8000/api/products?page=1&limit=10&ratingsAverage=4.4&price=55.99
+  * we have two way to make filtretion:
+  in controllers/productControllers.js: getProducts
+ 1. .find({price: req.query.price, ratingsAverage: req.query.ratingsAverage})
+ 2. .find().where('price').equals(req.query.price).where("ratingsAverage").equals(req.query.ratingsAverage)
+ * filtering
+  *const queryStringObj = { ...req.query };
+  *const excludFilds = ["page", "limit", "filds", "sort"];
+  *excludFilds.forEach((fields) => delete queryStringObj[fields]);
+ *build query
+ *execute query
+
+ $ products filtration by <= or >= 
+ {price: {$gte: 50}, ratingAverge: {$gte: 4}}
+ * http://localhost:8000/api/products?page=1&limit=10&ratingsAverage[gte]=4&price[gte]=50
+ 1. احول الكوري لاسترينج
+ 2.$ اعمل ريبليس فانكشن علشان تدورلي وتحولي ل 
+
+code
+ // const queryStringObj = { ...req.query };
+  // const excludFilds = ["page", "limit", "fields", "sort"];
+  // excludFilds.forEach((field) => delete queryStringObj[field]);
+
+  // // applay filteration using [gte, gt, lte, lt]
+  // let queryStr = JSON.stringify(queryStringObj);
+  // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
+
+ HEADLINE: pagination
+  // const page = req.query.page * 1 || 1;
+  // const limit = req.query.limit * 1 || 50;
+  // const skip = (page - 1) * limit;
+// let mongooseQuery = ProductModel.find(JSON.parse(queryStr));
+  // .skip(skip)
+  // .limit(limit).populate({ path: "category", select: "name" });
+
+HEADLINE: SORTING
+in controllers/productController.js
+* http://localhost:8000/api/products?sort=price                assending
+* http://localhost:8000/api/products?sort=-price                desinding
+* http://localhost:8000/api/products?sort=-sold          sold => الاكثر مبيعا
+
+* http://localhost:8000/api/products?sort=-sold,price        سعر اقل واكث مبيعا
+// price, -sold =>      [price, -sold]  price -sold
+  const sortBy = req.query.sort.split(",").join(" ");
+
+  code 
+   // if (req.query.sort) {
+  //   // price, -sold =>      [price, -sold]  price -sold
+  //   const sortBy = req.query.sort.split(",").join(" ");
+  //   mongooseQuery = mongooseQuery.sort(sortBy);
+  // } else {
+  //   mongooseQuery = mongooseQuery.sort("-createdAt");
+  // }
+  
+HEADLINE: FIELDS LIMITING
+in controllers/productController.js
+* http://localhost:8000/api/products?fields=title,ratingAverage,imageCover,price
+
+code 
+ //if (req.query.fields) {
+  //   const fields = req.query.fields.split(",").join(" ");
+  //   mongooseQuery = mongooseQuery.select(fields);
+  // } else {
+  //   mongooseQuery = mongooseQuery.select("-__v");
+  // }
+
+
+HEADLINE: Searching
+in controllers/productController.js
+* http://localhost:8000/api/products?keyword=mens
+
+code
+// if (req.query.keyword) {
+//     const query = {};
+//     query.$or = [
+//       { title: { $regex: req.query.keyword, $options: "i" } },
+//       // { description: { $regex: req.query.keyword, $options: "i" } },
+//     ];
+//     mongooseQuery = mongooseQuery.find(query);
+//   }
+
+
+TODO: Factor our api
+*from controllers/productControllers.js to utils/apiFeatuers.js
+and require it in productController.js
+
+TODO: return pagination results on the response
+
  */
+
+// param - body - query
