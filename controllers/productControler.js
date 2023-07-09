@@ -2,22 +2,28 @@ const slugify = require("slugify");
 const asyncHandler = require("express-async-handler");
 const ProductModel = require("../models/productModel");
 const ApiError = require("../utils/apiError");
+const ApiFeatures = require("../utils/apiFeatuers");
 /**
  *  @desc  get list of product
  *  @route Get  /api/products
  *  @access public
  */
 exports.getProducts = asyncHandler(async (req, res) => {
-  // pagination
-  const page = req.query.page * 1 || 1;
-  const limit = req.query.limit * 1 || 5;
-  const skip = (page - 1) * limit;
-  //logic
-  const products = await ProductModel.find({})
-    .skip(skip)
-    .limit(limit)
-    .populate({ path: "category", select: "name" });
-  res.status(200).json({ results: products.length, page, data: products });
+  // build query
+  const documentCounts = await ProductModel.countDocuments();
+  const apiFeatures = new ApiFeatures(ProductModel.find(), req.query)
+    .paginate(documentCounts)
+    .filter()
+    .limitFields()
+    .search()
+    .sort();
+
+  // execute query
+  const { mongooseQuery, paginationResult } = apiFeatures;
+  const products = await mongooseQuery;
+  res
+    .status(200)
+    .json({ results: products.length, paginationResult, data: products });
 });
 
 /**
