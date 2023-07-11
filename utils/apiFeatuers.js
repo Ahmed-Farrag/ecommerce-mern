@@ -18,8 +18,8 @@ class ApiFeatures {
   sort() {
     if (this.queryString.sort) {
       // price, -sold =>      [price, -sold]  price -sold
-      const sortBy = this.mongooseQuery.sort.split(",").join(" ");
-      this.mongooseQuery = mongooseQuery.sort(sortBy);
+      const sortBy = this.queryString.sort.split(",").join(" ");
+      this.mongooseQuery = this.mongooseQuery.sort(sortBy);
     } else {
       this.mongooseQuery = this.mongooseQuery.sort("-createdAt");
     }
@@ -36,13 +36,36 @@ class ApiFeatures {
     return this;
   }
 
-  search() {
+  // search(modelName) {
+  //   if (this.queryString.keyword) {
+  //     let query = {};
+  //     if (modelName === "Products") {
+  //       query.$or = [
+  //         { title: { $regex: this.queryString.keyword, $options: "i" } },
+  //         { description: { $regex: this.queryString.keyword, $options: "i" } },
+  //       ];
+  //     } else {
+  //       query = { name: { $regex: this.queryString.keyword, $options: "i" } };
+  //     }
+
+  //     this.mongooseQuery = this.mongooseQuery.find(query);
+  //   }
+  //   return this;
+  // }
+
+  search(modelName) {
     if (this.queryString.keyword) {
       let query = {};
-      query.$or = [
-        { title: { $regex: this.queryString.keyword, $options: "i" } },
-        { description: { $regex: this.queryString.keyword, $options: "i" } },
-      ];
+      if (modelName === "Products") {
+        query.$or = [
+          { title: { $regex: new RegExp(this.queryString.keyword, "i") } },
+          {
+            description: { $regex: new RegExp(this.queryString.keyword, "i") },
+          },
+        ];
+      } else {
+        query = { name: { $regex: new RegExp(this.queryString.keyword, "i") } };
+      }
       this.mongooseQuery = this.mongooseQuery.find(query);
     }
     return this;

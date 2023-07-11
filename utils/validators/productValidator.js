@@ -9,7 +9,11 @@ exports.createProductValidator = [
     .isLength({ min: 3 })
     .withMessage("Must be at least 3 chars")
     .notEmpty()
-    .withMessage("Product Required"),
+    .withMessage("Product Required")
+    .custom((val, { req }) => {
+      req.body.slug = slugify(val);
+      return true;
+    }),
   check("description")
     .notEmpty()
     .withMessage("Product description is require")
@@ -108,6 +112,7 @@ exports.createProductValidator = [
     .optional()
     .isNumeric()
     .withMessage("ratingQuantity must be a number"),
+
   validatorMiddleware,
 ];
 
