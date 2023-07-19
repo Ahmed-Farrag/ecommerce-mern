@@ -2,6 +2,7 @@ import Footer from "./Components/Utility/Footer";
 import NavBarLogin from "./Components/Utility/NavBarLogin";
 import LoginPage from "./Pages/Auth/LoginPage";
 import RegisterPage from "./Pages/Auth/RegisterPage";
+import AllCategoryPage from "./Pages/Category/AllCategoryPage";
 import HomePage from "./Pages/Home/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/allcategory" element={<AllCategoryPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
