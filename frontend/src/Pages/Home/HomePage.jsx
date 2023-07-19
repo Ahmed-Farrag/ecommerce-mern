@@ -13,7 +13,7 @@ const HomePage = () => {
       <CardProductsContainer title="الاكثر مبيعا" btntitle="المزيد" />
       <DiscountSection />
       <CardProductsContainer title="احدث الازياء" btntitle="المزيد" />
-      <BrandFeatured />
+      <BrandFeatured title="كل المركات" btntitle="المزيد" />
     </div>
   );
 };
