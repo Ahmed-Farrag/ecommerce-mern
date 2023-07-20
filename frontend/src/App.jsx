@@ -6,6 +6,7 @@ import AllBrandPage from "./Pages/Brand/AllBrandPage";
 import AllCategoryPage from "./Pages/Category/AllCategoryPage";
 import HomePage from "./Pages/Home/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/allcategory" element={<AllCategoryPage />} />
           <Route path="/allbrand" element={<AllBrandPage />} />
+          <Route path="/products" element={<ShopProductsPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />

@@ -3,11 +3,11 @@ import { Container, Row } from "react-bootstrap";
 import SubTitle from "../Utility/SubTitle";
 import ProductCard from "./ProductCard";
 
-const CardProductsContainer = ({ title, btntitle }) => {
+const CardProductsContainer = ({ title, btntitle, pathText }) => {
   return (
     <Container>
       {/**puss title and btn as a props to make it dynamic */}
-      <SubTitle title={title} btntitle={btntitle} />
+      <SubTitle title={title} btntitle={btntitle} pathText={pathText} />
       <Row className="d-flex justify-content-between my-2">
         <ProductCard />
         <ProductCard />
