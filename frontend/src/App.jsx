@@ -7,6 +7,7 @@ import AllCategoryPage from "./Pages/Category/AllCategoryPage";
 import HomePage from "./Pages/Home/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
+import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/allcategory" element={<AllCategoryPage />} />
           <Route path="/allbrand" element={<AllBrandPage />} />
           <Route path="/products" element={<ShopProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetailsPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
