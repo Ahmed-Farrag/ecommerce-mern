@@ -8,6 +8,8 @@ import HomePage from "./Pages/Home/HomePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
+import CartPage from "./Pages/Cart/CartPage";
+import ChoosePayMethodPage from "./Pages/Checkout/ChoosePayMethodPage";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/allbrand" element={<AllBrandPage />} />
           <Route path="/products" element={<ShopProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/order/paymethod" element={<ChoosePayMethodPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
