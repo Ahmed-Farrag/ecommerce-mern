@@ -1,9 +1,9 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import UserSideBar from "../../Components/User/UserSideBar";
-import UserAllOrder from "../../Components/User/UserAllOrder";
+import UserfavoriteProduct from "../../Components/User/UserfavoriteProduct";
 
-const UserAllOrderPage = () => {
+const UserFavoriteProductsPage = () => {
   return (
     <Container>
       <Row className="py-3">
@@ -11,11 +11,11 @@ const UserAllOrderPage = () => {
           <UserSideBar />
         </Col>
         <Col sm="9" xs="10" md="10">
-          <UserAllOrder />
+          <UserfavoriteProduct />
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default UserAllOrderPage;
+export default UserFavoriteProductsPage;

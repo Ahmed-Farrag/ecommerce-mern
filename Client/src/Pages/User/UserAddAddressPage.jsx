@@ -1,9 +1,9 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import UserAddAddress from "../../Components/User/UserAddAddress";
 import UserSideBar from "../../Components/User/UserSideBar";
-import UserAllOrder from "../../Components/User/UserAllOrder";
+import { Col, Container, Row } from "react-bootstrap";
 
-const UserAllOrderPage = () => {
+const UserAddAddressPage = () => {
   return (
     <Container>
       <Row className="py-3">
@@ -11,11 +11,11 @@ const UserAllOrderPage = () => {
           <UserSideBar />
         </Col>
         <Col sm="9" xs="10" md="10">
-          <UserAllOrder />
+          <UserAddAddress />
         </Col>
       </Row>
     </Container>
   );
 };
 
-export default UserAllOrderPage;
+export default UserAddAddressPage;
