@@ -10,6 +10,14 @@ import ShopProductsPage from "./Pages/Products/ShopProductsPage";
 import ProductDetailsPage from "./Pages/Products/ProductDetailsPage";
 import CartPage from "./Pages/Cart/CartPage";
 import ChoosePayMethodPage from "./Pages/Checkout/ChoosePayMethodPage";
+import AdminAllProductsPage from "./Pages/Admin/AdminAllProductsPage";
+import AdminAllOrdersPage from "./Pages/Admin/AdminAllOrdersPage";
+import AdminAllOrderDetailsPage from "./Pages/Admin/AdminAllOrderDetailsPage";
+import AdminAddBrandPage from "./Pages/Admin/AdminAddBrandPage";
+import AdminAddCategoryPage from "./Pages/Admin/AdminAddCategoryPage";
+import AdminAddSubCategoryPage from "./Pages/Admin/AdminAddSubCategoryPage";
+import AdminAddProductsPage from "./Pages/Admin/AdminAddProductsPage";
+import UserAllOrderPage from "./Pages/User/UserAllOrderPage";
 
 function App() {
   return (
@@ -26,6 +34,20 @@ function App() {
           <Route path="/products/:id" element={<ProductDetailsPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/order/paymethod" element={<ChoosePayMethodPage />} />
+          <Route path="/admin/allproducts" element={<AdminAllProductsPage />} />
+          <Route path="/admin/allorders" element={<AdminAllOrdersPage />} />
+          <Route
+            path="/admin/orders/:id"
+            element={<AdminAllOrderDetailsPage />}
+          />
+          <Route path="/admin/addbrand" element={<AdminAddBrandPage />} />
+          <Route path="/admin/addcategory" element={<AdminAddCategoryPage />} />
+          <Route
+            path="/admin/addsubcategory"
+            element={<AdminAddSubCategoryPage />}
+          />
+          <Route path="/admin/addproduct" element={<AdminAddProductsPage />} />
+          <Route path="/user/allorders" element={<UserAllOrderPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
