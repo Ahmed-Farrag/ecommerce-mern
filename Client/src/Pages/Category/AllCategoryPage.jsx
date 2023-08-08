@@ -14,7 +14,9 @@ const AllCategoryPage = () => {
   
     const category = useSelector((state) => state.allCategory.category);
     const loading = useSelector((state) => state.allCategory.loading);
-    console.log(loading);
+
+    if(category.PaginationResult)
+       console.log(category.PaginationResult.numberOfPages);
     
   return (
     <div style={{ minHeight: "670px" }}>
