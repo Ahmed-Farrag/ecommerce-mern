@@ -20,18 +20,16 @@ const CategoryContainer = ({data, loading}) => {
     <Container>
       <div className="admin-content-text mt-2">كل التصنيفات</div>
       <Row className="d-flex justify-content-between my-2">
-        {loading === false ? (
-          data ?(
-            data.map((item, index) => {
-              return (
-                <CategoryCard key={index} title={item.name} img={item.image}
-                background={colors[Math.floor(Math.random() * 5) + 1]}/>)
-            })
-          
-        ) : 
-          <h4>لا يوجد تصنيفات</h4>
-  ): <Spinner animation="border" variant="primary" />
-}
+         {
+                    loading === false ? (
+                        data ? (
+                            data.map((item, index) => {
+                                return (<CategoryCard key={index} title={item.name} img={item.image} background={colors[Math.floor(Math.random() * 5) + 1]} />)
+                            })
+                        ) : <h4>لا يوجد تصنيفات</h4>
+                    ) : <Spinner animation="border" variant="primary" />
+
+                }
       </Row>
     </Container>
   );

@@ -7,7 +7,7 @@ export const getAllCategory = (limit) => async (dispatch) => {
     console.log(respose.data);
     dispatch({
       type: GET_ALL_CATEGORY,
-      payload: respose.data,
+      payload: respose,
     });
   } catch (e) {
     dispatch({
@@ -16,3 +16,19 @@ export const getAllCategory = (limit) => async (dispatch) => {
     });
   }
 };
+
+export const getAllCategoryPage = (page) => async (dispatch) => {
+  try {
+    const respose = await useGetData(`/api/v1/categories?limit=3&page=${page}`);
+    dispatch({
+      type: GET_ALL_CATEGORY,
+      payload: respose,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "ERROR" + e,
+    });
+  }
+};
+

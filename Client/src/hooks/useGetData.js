@@ -5,3 +5,5 @@ const useGetData = async (url, parmas) => {
 };
 
 export default useGetData;
+
+
