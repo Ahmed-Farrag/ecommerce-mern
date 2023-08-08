@@ -4,7 +4,6 @@ import Pagination from "../../Components/Utility/Pagination";
 
 const AllCategoryPage = () => {
 
-  const AllCategoryPage = ({ data }) => {
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(getAllCategory());
