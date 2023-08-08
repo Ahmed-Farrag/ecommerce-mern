@@ -1,29 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import CategoryCard from "./CategoryCard";
-import clothe from "../../Assets/clothe.png";
-import cat2 from "../../Assets/cat2.png";
-import labtop from "../../Assets/labtop.png";
-import sale from "../../Assets/sale.png";
-import pic from "../../Assets/pic.png";
 
-const CategoryContainer = () => {
+import { getAllCategory } from "../../Redux/action/categoryAction";
+import { useDispatch, useSelector } from "react-redux";
+
+const CategoryContainer = ({data}) => {
+  
+
+  const colors = [
+    "#FFD3E8",
+    "#F4DBA5",
+    "#55CFDF",
+    "FF6262",
+    "#0034FF",
+    "#FFD3E8",
+  ];
+
   return (
     <Container>
       <div className="admin-content-text mt-2">كل التصنيفات</div>
       <Row className="d-flex justify-content-between my-2">
-        <CategoryCard title="اجهزة مدرسية" img={clothe} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={cat2} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={labtop} background="#0034FF" />
-        <CategoryCard title="اجهزة مدرسية" img={sale} background="#FF6262" />
-        <CategoryCard title="اجهزة مدرسية" img={pic} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={clothe} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={cat2} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={labtop} background="#0034FF" />
-        <CategoryCard title="اجهزة مدرسية" img={sale} background="#FF6262" />
-        <CategoryCard title="اجهزة مدرسية" img={pic} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={clothe} background="#F4DBA4" />
-        <CategoryCard title="اجهزة مدرسية" img={cat2} background="#F4DBA4" />
+        {loading === false ? (
+          data ?(
+            data.map((item, index) => {
+              return (
+                <CategoryCard key={index} title={item.name} img={item.image}
+                background={colors[Math.floor(Math.random() * 5) + 1]}/>)
+            })
+          
+        ) : 
+          <h4>لا يوجد تصنيفات</h4>
+  ): <Spinner animation="border" variant="primary" />
+}
       </Row>
     </Container>
   );
