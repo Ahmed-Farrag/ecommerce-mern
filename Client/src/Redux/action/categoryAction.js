@@ -1,6 +1,9 @@
-import { GET_ALL_CATEGORY, GET_ERROR } from "../type";
+import { GET_ALL_CATEGORY, GET_ERROR, CREATE_CATEGORY } from "../type";
 import useGetData from "../../hooks/useGetData";
+import { useInsertDataWithImage } from "../../hooks/useInsertData";
 
+
+// get all category
 export const getAllCategory = (limit) => async (dispatch) => {
   try {
     const respose = await useGetData(`/api/v1/categories?limit=${limit}`);
@@ -17,6 +20,7 @@ export const getAllCategory = (limit) => async (dispatch) => {
   }
 };
 
+// get all category with pagination
 export const getAllCategoryPage = (page) => async (dispatch) => {
   try {
     const respose = await useGetData(`/api/v1/categories?limit=3&page=${page}`);
@@ -32,3 +36,20 @@ export const getAllCategoryPage = (page) => async (dispatch) => {
   }
 };
 
+
+// get all category with pagination
+export const createCategory  = (formData) => async (dispatch) => {
+  try {
+    const respose = await useInsertDataWithImage(`/api/v1/categories`, formData);
+    dispatch({
+      type: CREATE_CATEGORY,
+      payload: respose,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "ERROR" + e,
+    });
+  }
+};

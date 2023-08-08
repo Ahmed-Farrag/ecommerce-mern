@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import avatar from "../../Assets/avatar.png";
 
+import { createCategory } from "../../Redux/action/categoryAction";
+import { useDispatch, useSelector } from "react-redux";
+
 const AdminAddCategory = () => {
+
+  const dispatch = useDispatch();
+
 
   const [img, setImg] = useState(avatar)
   const [name, setName] = useState('')
