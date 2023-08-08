@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
-import { Container, Row } from "react-bootstrap";
+import React from "react";
+import { Container, Row, Spinner } from "react-bootstrap";
 import CategoryCard from "./CategoryCard";
 
-import { getAllCategory } from "../../Redux/action/categoryAction";
-import { useDispatch, useSelector } from "react-redux";
 
-const CategoryContainer = ({data}) => {
+
+const CategoryContainer = ({data, loading}) => {
   
 
   const colors = [
