@@ -40,7 +40,7 @@ export const getAllCategoryPage = (page) => async (dispatch) => {
 // get all category with pagination
 export const createCategory  = (formData) => async (dispatch) => {
   try {
-    const respose = await useInsertDataWithImage(`/api/v1/categories`, formData);
+    const respose = await useInsertDataWithImage(`/stage2/upload`, formData);
     dispatch({
       type: CREATE_CATEGORY,
       payload: respose,

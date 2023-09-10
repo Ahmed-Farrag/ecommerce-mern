@@ -12,16 +12,21 @@ const AdminAddCategory = () => {
 
   const [img, setImg] = useState(avatar)
   const [name, setName] = useState('')
+  const [selectedFile, setSelectedFile] = useState(null)
 
   // when image change save it
   const onImageChange = (event)=>{
     if(event.target.files && event.target.files[0]){
       setImg(URL.createObjectURL(event.target.files[0]))
+      setSelectedFile(event.target.files[0])
 }
   }
 // save data in DB
   const handleSubmit = (event)=>{
     event.preventDefault()
+    const formData = new FormData();
+    formData.append('object_key', selectedFile)
+    dispatch(createCategory(formData))
 
   }
 
