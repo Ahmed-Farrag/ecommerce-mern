@@ -12,17 +12,17 @@ const categoryReducer = (state = inital, action) => {
         ...state,
         category: action.payload,
         loading: false,
-      }
-      case CREATE_CATEGORY:
-        return{
-          category: action.payload,
-          loading: false
-        }
-      case GET_ERROR:
-        return{
-          loading: true,
-          category: action.payload
-        }
+      };
+    case CREATE_CATEGORY:
+      return {
+        category: action.payload,
+        loading: false,
+      };
+    case GET_ERROR:
+      return {
+        loading: true,
+        category: action.payload,
+      };
     default:
       return state;
   }
