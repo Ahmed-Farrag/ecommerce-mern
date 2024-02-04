@@ -1,6 +1,0 @@
-{
-  "editor.fontLigatures": true,
-  "editor.fontFamily": "fira code, monospace",
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-}
