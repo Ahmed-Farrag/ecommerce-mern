@@ -18,7 +18,7 @@ const AddCategoryHook = () => {
 
   //   to change name status
   const onChangeName = (event) => {
-    event.Persist(); // like preventDefault
+    event.persist(); // like preventDefault
     setName(event.target.value);
   };
   // when image change save it
