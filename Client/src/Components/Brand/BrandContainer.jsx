@@ -1,21 +1,24 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import BrandCard from "./BrandCard";
 import brand1 from "../../Assets/brand1.png";
-import brand2 from "../../Assets/brand2.png";
-import brand3 from "../../Assets/brand3.png";
 
-const BrandContainer = () => {
+const BrandContainer = ({ data, loading }) => {
   return (
     <Container>
       <div className="admin-content-text mt-2">كل المركات</div>
       <Row className="d-flex justify-content-between my-1">
-        <BrandCard img={brand1} />
-        <BrandCard img={brand2} />
-        <BrandCard img={brand3} />
-        <BrandCard img={brand1} />
-        <BrandCard img={brand3} />
-        <BrandCard img={brand2} />
+        {!loading ? (
+          data ? (
+            data.slice(0, 5).map((item, index) => {
+              return <BrandCard key={index} img={item.image} />;
+            })
+          ) : (
+            <h4>no brand</h4>
+          )
+        ) : (
+          <Spinner animation="border" variant="primary" />
+        )}
       </Row>
     </Container>
   );
