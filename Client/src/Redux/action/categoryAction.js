@@ -38,37 +38,21 @@ export const getAllCategoryPage = (page) => async (dispatch) => {
 };
 
 //get all category with pagination
-// export const createCategory = (formData) => async (dispatch) => {
-//   try {
-//       const response = await useInsertDataWithImage(`/api/v1/categories`, formData);
-//       dispatch({
-//           type: CREATE_CATEGORY,
-//           payload: response,
-//           loading: true
-//       })
-
-//   } catch (e) {
-//       dispatch({
-//           type: GET_ERROR,
-//           payload: "Error " + e,
-//       })
-//   }
-// }
-
-// get all category with pagination
 export const createCategory = (formData) => async (dispatch) => {
   try {
-    // const respose = await useInsertDataWithImage(`/stage2/upload`, formData);
-    const respose = await useInsertDataWithImage(`/stage2/upload`, formData);
+    const response = await useInsertDataWithImage(
+      `/api/v1/categories`,
+      formData
+    );
     dispatch({
       type: CREATE_CATEGORY,
-      payload: respose,
+      payload: response,
       loading: true,
     });
   } catch (e) {
     dispatch({
       type: GET_ERROR,
-      payload: "ERROR" + e,
+      payload: "Error " + e,
     });
   }
 };

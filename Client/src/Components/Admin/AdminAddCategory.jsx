@@ -1,77 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
-import avatar from "../../Assets/avatar.png";
-
-import { createCategory } from "../../Redux/action/categoryAction";
-import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import AddCategoryHook from "../../hook/category/add-category-hook";
 
 const AdminAddCategory = () => {
-  const dispatch = useDispatch();
-
-  const [img, setImg] = useState(avatar);
-  const [name, setName] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
-  // to get loading state from redux
-  const [loading, setLoading] = useState(true);
-  const [isPress, setIsPress] = useState(true);
-
-  // when image change save it
-  const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImg(URL.createObjectURL(event.target.files[0]));
-      setSelectedFile(event.target.files[0]);
-    }
-  };
-  // save data in DB
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    // formData.append("name", name)
-    formData.append("image", selectedFile);
-    dispatch(createCategory(formData));
-  };
-
-  // when image change save it
-  // const onImageChange = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     setImg(URL.createObjectURL(event.target.files[0]));
-  //     setSelectedFile(event.target.files[0]);
-  //   }
-  // };
-  // save data in DB
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  // validation
-  //   if (name === "" || selectedFile===null) {
-  //     alert("Name is required");
-  //     return;
-  //   }
-  //   if (selectedFile === null) {
-  //     alert("Image is required");
-  //     return;
-  //   }
-
-  //   const formData = new FormData();
-  //   formData.append("name", name);
-  //   formData.append("image", selectedFile);
-
-  //   setLoading(true)
-  //   setIsPress(true)
-  //   await dispatch(createCategory(formData));
-  //   setLoading(false)
-  // };
-
-  // useEffect(() => {
-  //   if (loading === false) {
-  //     setImg(avatar);
-  //     setName("");
-  //     setSelectedFile(null);
-  //     console.log("تم الانتهاء");
-  //     setLoading(true);
-  //     setTimeout(() => { setIsPress(false); }, 1000);
-  //   }
-  // }, [loading]);
+  const [
+    img,
+    name,
+    loading,
+    isPress,
+    handleSubmit,
+    onImageChange,
+    onChangeName,
+  ] = AddCategoryHook();
 
   return (
     <div>
@@ -99,7 +40,7 @@ const AdminAddCategory = () => {
           </div>
 
           <input
-            onChange={(e) => setName(e.target.value)}
+            onChange={onChangeName}
             value={name}
             type="text"
             className="input-form d-block mt-3 px-3"
@@ -121,6 +62,7 @@ const AdminAddCategory = () => {
           <h4>تم الانتهاء</h4>
         )
       ) : null}
+      <ToastContainer />
     </div>
   );
 };
