@@ -23,7 +23,7 @@ export const getAllCategory = (limit) => async (dispatch) => {
 export const getAllCategoryPage = (page) => async (dispatch) => {
   try {
     const response = await useGetData(
-      `/api/v1/categories?limit=3&page=${page}`
+      `/api/v1/categories?limit=6&page=${page}`
     );
     dispatch({
       type: GET_ALL_CATEGORY,

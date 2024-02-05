@@ -1,4 +1,4 @@
-import { CREATE_CATEGORY, GET_ALL_CATEGORY, GET_ERROR } from "../type";
+import { GET_ALL_CATEGORY, GET_ERROR, CREATE_CATEGORY } from "../type";
 
 // initial value
 const inital = {
