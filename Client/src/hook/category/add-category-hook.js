@@ -35,7 +35,7 @@ const AddCategoryHook = () => {
     event.preventDefault();
     // validation
     if (name === "" || selectedFile === null) {
-      notify("data is required", "warn");
+      notify("يجب اضافة البيانات", "warn");
       return;
     }
 
@@ -61,9 +61,9 @@ const AddCategoryHook = () => {
       }, 1000);
       // handle code res
       if (res.status === 201) {
-        notify("succes", "success");
+        notify("تم الاضافة بنجاح", "success");
       } else {
-        notify("eror", "error");
+        notify("يوجد مشكلة", "error");
       }
     }
   }, [loading]);

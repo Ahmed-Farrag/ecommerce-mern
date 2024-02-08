@@ -12,7 +12,7 @@ const HomeCategoryHook = () => {
   const loading = useSelector((state) => state.allCategory.loading);
 
   console.log(category);
-  console.log(loading);
+  // console.log(loading);
 
   const colors = [
     "#FFD3E8",

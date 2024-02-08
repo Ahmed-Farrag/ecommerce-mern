@@ -21,7 +21,7 @@ const BrandFeatured = ({ title, btntitle }) => {
               return <BrandCard key={index} img={item.image} />;
             })
           ) : (
-            <h4>no brand</h4>
+            <h4>لا يوجد ماركات</h4>
           )
         ) : (
           <Spinner animation="border" variant="primary" />
