@@ -5,7 +5,7 @@ const inital = {
   brand: [],
   loading: true,
 };
-const brandeducer = (state = inital, action) => {
+const brandReducer = (state = inital, action) => {
   switch (action.type) {
     case GET_ALL_BRAND:
       return {
@@ -27,4 +27,4 @@ const brandeducer = (state = inital, action) => {
       return state;
   }
 };
-export default brandeducer;
+export default brandReducer;

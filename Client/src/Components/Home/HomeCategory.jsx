@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Container, Row, Spinner } from "react-bootstrap";
 import SubTitle from "../Utility/SubTitle";
 import CategoryCard from "../Category/CategoryCard";

@@ -2,7 +2,6 @@ import React from "react";
 import { Col, Row, Spinner } from "react-bootstrap";
 import AddBrandHook from "../../hook/brand/add-brand-hook";
 import { ToastContainer, toast } from "react-toastify";
-
 const AdminAddBrand = () => {
   const [
     img,

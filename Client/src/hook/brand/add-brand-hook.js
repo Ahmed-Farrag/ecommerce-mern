@@ -8,7 +8,6 @@ import avatar from "../../Assets/avatar.png";
 
 const AddBrandHook = () => {
   const dispatch = useDispatch();
-
   const [img, setImg] = useState(avatar);
   const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -56,14 +55,12 @@ const AddBrandHook = () => {
       setSelectedFile(null);
       console.log("تم الانتهاء");
       setLoading(true);
-      setTimeout(() => {
-        setIsPress(false);
-      }, 1000);
-      // handle code res
+      setTimeout(() => setIsPress(false), 1000);
+
       if (res.status === 201) {
-        notify("تم الاضافة بنجاح", "success");
+        notify("تمت عملية الاضافة بنجاح", "success");
       } else {
-        notify("يوجد مشكلة", "error");
+        notify("هناك مشكله فى عملية الاضافة", "error");
       }
     }
   }, [loading]);

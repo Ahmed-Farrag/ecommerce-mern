@@ -35,7 +35,7 @@ export const getAllBrandPage = (page) => async (dispatch) => {
   }
 };
 
-//get all brand with pagination
+//insert brand with pagination
 export const createBrand = (formData) => async (dispatch) => {
   try {
     const response = await useInsertDataWithImage(`/api/v1/brands`, formData);
