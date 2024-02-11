@@ -1,91 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React from "react";
+import { Row, Col, ToastContainer } from "react-bootstrap";
 import Multiselect from "multiselect-react-dropdown";
 import avatar from "../../Assets/avatar.png";
 import add from "../../Assets/add.png";
 import MultiImageInput from "react-multiple-image-input";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategory } from "../../Redux/action/categoryAction";
-import { getAllBrand } from "../../Redux/action/brandAction";
 import { CompactPicker } from "react-color";
-import { getOneCategory } from "../../Redux/action/subCategoryAction";
+import AddProductsHook from "../../hook/products/add-products-hook";
 
 const AdminAddProducts = () => {
-  // when work in first time dispatch on getallcategory
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllCategory());
-    dispatch(getAllBrand());
-  }, []);
-  // to arrive data
-  // get last category state from redux
-  const category = useSelector((state) => state.allCategory.category);
-  if (category) console.log(category.data);
-  // get last brand state from redux
-  const brand = useSelector((state) => state.allBrand.brand);
-
-  // get last subCategory state from redux
-  const subCategory = useSelector((state) => state.subcategory.subcategory);
-
-  const onSelect = () => {};
-  const onRemove = () => {};
-
-  // value images products
-  const crop = {
-    unit: "%",
-    aspect: 4 / 3,
-    width: "100",
-    height: "200",
-  };
-  const [images, setImages] = useState([]);
-
-  const [options, setOptions] = useState([]);
-  // values state
-  const [productName, setProductName] = useState("");
-  const [productDescription, setProductDescription] = useState("");
-  const [priceBefore, setPriceBefore] = useState("السعر قبل الخصم");
-  const [priceAfter, setPriceAfter] = useState("السعر بعد الخصم");
-  const [quantity, setQuantity] = useState("الكمية المتاحة");
-  const [categoryId, setCategoryId] = useState("");
-  const [brandId, setBrandId] = useState("");
-  const [subCategoryId, setSubCategoryId] = useState([]);
-  const [selectedSubId, setSelectedSubId] = useState([]);
-  // to show hide clor picker
-  const [showColor, setShowColor] = useState(false);
-  // to store all pick color
-  const [colors, setColors] = useState([]);
-  // when choose new color
-  const handleChangeComplete = (color) => {
-    setColors([...colors, color.hex]);
-    setShowColor(!showColor);
-  };
-  // remove color
-  const removeColor = (color) => {
-    const newColor = colors.filter((e) => e !== color);
-    setColors(newColor);
-  };
-
-  // when select category store id
-  const onSelectCategory = async (e) => {
-    if (e.target.value !== 0) {
-      await dispatch(getOneCategory(e.target.value));
-    }
-    setCategoryId(e.target.value);
-  };
-  useEffect(() => {
-    if (categoryId !== 0) {
-      if (subCategory.data) {
-        setOptions(subCategory.data);
-      }
-    }
-  }, [categoryId]);
-
-  // when select brand store id
-  const onSelectBrand = (e) => {
-    setBrandId(e.target.value);
-  };
-  console.log(brandId);
-
+  const [
+    category,
+    brand,
+    subCategory,
+    products,
+    loading,
+    images,
+    colors,
+    productName,
+    productDescription,
+    priceAfter,
+    priceBefore,
+    quantity,
+    options,
+    showColor,
+    setImages,
+    onSelect,
+    onRemove,
+    handleChangeComplete,
+    handleSubmit,
+    removeColor,
+    onSelectBrand,
+    onSelectCategory,
+    crop,
+    onChangeProductName,
+    onChangeProductDescription,
+    onChangeQuantity,
+    onChangePriceAfter,
+    onChangePriceBefore,
+    onChangeColor,
+  ] = AddProductsHook();
   return (
     <div>
       <Row className="justify-content-start ">
@@ -103,14 +56,16 @@ const AdminAddProducts = () => {
           />
           <input
             value={productName}
-            onChange={(e) => setProductName(e.target.value)}
+            // onChange={(e) => setProductName(e.target.value)}
+            onChange={onChangeProductName}
             type="text"
             className="input-form d-block mt-3 px-3"
             placeholder="اسم المنتج"
           />
           <textarea
             value={productDescription}
-            onChange={(e) => setProductDescription(e.target.value)}
+            // onChange={(e) => setProductDescription(e.target.value)}
+            onChange={onChangeProductDescription}
             className="input-form-area p-2 mt-3"
             rows="4"
             cols="50"
@@ -118,35 +73,42 @@ const AdminAddProducts = () => {
           />
           <input
             value={priceBefore}
-            onChange={(e) => setPriceBefore(e.target.value)}
+            //{onChange={(e) => setPriceBefore(e.target.value)}}
+            onChange={onChangePriceBefore}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="السعر قبل الخصم"
           />
           <input
             value={priceAfter}
-            onChange={(e) => setPriceAfter(e.target.value)}
+            //{onChange={(e) => setPriceAfter(e.target.value)}}
+            onChange={onChangePriceAfter}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="السعر بعد الخصم"
           />
           <input
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            // {onChange={(e) => setQuantity(e.target.value)}}
+            onChange={onChangeQuantity}
             type="number"
             className="input-form d-block mt-3 px-3"
             placeholder="الكمية المتاحة"
           />
+
           <select
-            onChange={onSelectCategory}
             name="category"
-            id="category"
+            onChange={onSelectCategory}
             className="select input-form-area mt-3 px-2 "
           >
             <option value="0">التصنيف الرئيسي</option>
             {category.data
-              ? category.data.map((item) => {
-                  return <option value={item._id}>{item.name}</option>;
+              ? category.data.map((item, index) => {
+                  return (
+                    <option key={index} value={item._id}>
+                      {item.name}
+                    </option>
+                  );
                 })
               : null}
           </select>
@@ -166,7 +128,7 @@ const AdminAddProducts = () => {
             id="brand"
             className="select input-form-area mt-3 px-2 "
           >
-            <option value="val">اختر ماركة</option>
+            <option value="0">اختر ماركة</option>
             {brand.data
               ? brand.data.map((item) => {
                   return <option value={item._id}>{item.name}</option>;
@@ -189,7 +151,8 @@ const AdminAddProducts = () => {
               : null}
 
             <img
-              onClick={() => setShowColor(!showColor)}
+              // onClick={() => setShowColor(!showColor)}
+              onClick={onChangeColor}
               src={add}
               alt=""
               width="30px"
@@ -205,9 +168,12 @@ const AdminAddProducts = () => {
       </Row>
       <Row>
         <Col sm="8" className="d-flex justify-content-end ">
-          <button className="btn-save d-inline mt-2 ">حفظ التعديلات</button>
+          <button onClick={handleSubmit} className="btn-save d-inline mt-2 ">
+            حفظ التعديلات
+          </button>
         </Col>
       </Row>
+      <ToastContainer />
     </div>
   );
 };

@@ -21,7 +21,7 @@ const subcategoryReducer = (state = inital, action) => {
     case GET_ERROR:
       return {
         loading: true,
-        category: action.payload,
+        subcategory: action.payload,
       };
     default:
       return state;
