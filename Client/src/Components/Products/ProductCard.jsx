@@ -5,7 +5,7 @@ import favoff from "../../Assets/fav-off.png";
 import rate from "../../Assets/rate.png";
 import { Link } from "react-router-dom";
 
-const ProductCard = () => {
+const ProductCard = ({ item }) => {
   return (
     <Col xs="6" sm="6" md="4" lg="3" className="d-flex">
       <Card
@@ -36,9 +36,7 @@ const ProductCard = () => {
         </div>
         <Card.Body>
           <Card.Title>
-            <div className="card-title">
-              سود كربون ساعة يد ذكية بيب إس أسود كربون
-            </div>
+            <div className="card-title">{item.title} </div>
           </Card.Title>
           <Card.Text>
             <div className="d-flex justify-content-between ">

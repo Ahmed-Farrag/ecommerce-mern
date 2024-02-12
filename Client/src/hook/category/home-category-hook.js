@@ -11,7 +11,7 @@ const HomeCategoryHook = () => {
   const category = useSelector((state) => state.allCategory.category);
   const loading = useSelector((state) => state.allCategory.loading);
 
-  console.log(category);
+  // console.log(category);
   // console.log(loading);
 
   const colors = [

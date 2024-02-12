@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getOneCategory } from "../../Redux/action/subCategoryAction";
 import notify from "../useNotification";
 import { createProduct } from "../../Redux/action/productsAction";
@@ -42,6 +42,7 @@ const AddProductsHook = () => {
     width: "100",
     height: "200",
   };
+
   const [options, setOptions] = useState([]);
 
   const [images, setImages] = useState({});
@@ -154,6 +155,10 @@ const AddProductsHook = () => {
       notify("من فضلك اكمل البيانات", "warn");
       return;
     }
+    if (priceBefore > priceAfter) {
+      notify("من فضلك تاكد من الخصم", "warn");
+      return;
+    }
     // convert base64 image to file
     const imgCover = dataURLtoFile(images[0], Math.random() + ".png");
     // convert array of base 64 image to file
@@ -176,13 +181,13 @@ const AddProductsHook = () => {
     itemImages.map((item) => formData.append("images", item));
     colors.map((color) => formData.append("availableColors", color));
     selectedSubId.map((item) => formData.append("subcategory", item._id));
-    // console.log(
-    //   productName,
-    //   productDescription,
-    //   quantity,
-    //   priceAfter,
-    //   images[0]
-    // );
+    console.log(
+      productName,
+      productDescription,
+      quantity,
+      priceAfter,
+      images[0]
+    );
     setLoading(true);
     await dispatch(createProduct(formData));
     setLoading(false);
@@ -203,7 +208,6 @@ const AddProductsHook = () => {
       setQuantity("الكمية المتاحة");
       setBrandId(0);
       setSelectedSubId([]);
-      setLoading(true);
       setTimeout(() => setLoading(true), 1500);
 
       if (products) {

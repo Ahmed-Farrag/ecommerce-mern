@@ -24,7 +24,7 @@ const AddSubcategoryHook = () => {
   // if (category) console.log(category.data);
 
   // get last subcategory state from redux
-  const subcategory = useSelector((state) => state.subcategory.subcategory);
+  const subcategory = useSelector((state) => state.subCategory.subcategory);
 
   // on Change dropdown menu
   const handleChange = (e) => {
