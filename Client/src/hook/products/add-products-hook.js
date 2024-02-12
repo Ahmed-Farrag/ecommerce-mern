@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { getOneCategory } from "../../Redux/action/subCategoryAction";
-import notify from "../useNotification";
 import { createProduct } from "../../Redux/action/productsAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategory } from "../../Redux/action/categoryAction";
 import { getAllBrand } from "../../Redux/action/brandAction";
+import notify from "../../hook/useNotification";
 
 const AddProductsHook = () => {
   // when work in first time dispatch on getallcategory
@@ -181,20 +181,17 @@ const AddProductsHook = () => {
     itemImages.map((item) => formData.append("images", item));
     colors.map((color) => formData.append("availableColors", color));
     selectedSubId.map((item) => formData.append("subcategory", item._id));
-    console.log(
-      productName,
-      productDescription,
-      quantity,
-      priceAfter,
-      images[0]
-    );
+    // console.log(
+    //   productName,
+    //   productDescription,
+    //   quantity,
+    //   priceAfter,
+    //   images[0]
+    // );
     setLoading(true);
     await dispatch(createProduct(formData));
     setLoading(false);
   };
-
-  //  get create measage
-  // const product = useSelector((state) => state.allProducts.products);
 
   useEffect(() => {
     if (loading === false) {

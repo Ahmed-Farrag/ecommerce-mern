@@ -1,7 +1,7 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 
-const ProductText = () => {
+const ProductText = ({ id }) => {
   return (
     <div>
       <Row className="mt-2">

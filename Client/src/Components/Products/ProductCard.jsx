@@ -19,8 +19,11 @@ const ProductCard = ({ item }) => {
           boxShadow: "0 2px 2px 0 rgba(151,151,151,0.5)",
         }}
       >
-        <Link to="/products/:id" style={{ textDecoration: "none" }}>
-          <Card.Img style={{ height: "228px", width: "100%" }} src={prod1} />
+        <Link to={`/products/${item._id}`} style={{ textDecoration: "none" }}>
+          <Card.Img
+            style={{ height: "228px", width: "100%" }}
+            src={item.imageCover}
+          />
         </Link>
 
         <div className="d-flex justify-content-end mx-2">
@@ -51,7 +54,7 @@ const ProductCard = ({ item }) => {
                 <div className="card-rate mx-2">4.5</div>
               </div>
               <div className="d-flex">
-                <div className="card-price">880</div>
+                <div className="card-price">{item.price}</div>
                 <div className="card-currency mx-1">جنيه</div>
               </div>
             </div>

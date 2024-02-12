@@ -50,7 +50,7 @@ const AdminAddProducts = () => {
             images={images}
             setImages={setImages}
             theme={"light"}
-            // allowCrop={false}
+            allowCrop={false}
             max={4}
             cropConfig={{ crop, ruleOfThirds: true }}
           />
