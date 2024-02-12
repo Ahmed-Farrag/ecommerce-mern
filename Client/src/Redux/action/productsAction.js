@@ -1,4 +1,9 @@
-import { CREATE_PRODUCTS, GET_ALL_PRODUCTS, GET_ERROR } from "../type";
+import {
+  CREATE_PRODUCTS,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_DETAILS,
+  GET_ERROR,
+} from "../type";
 import { useInsertDataWithImage } from "../../hooks/useInsertData";
 import useGetData from "../../hooks/useGetData";
 
@@ -28,6 +33,23 @@ export const getAllProducts = () => async (dispatch) => {
     const response = await useGetData("/api/v1/products");
     dispatch({
       type: GET_ALL_PRODUCTS,
+      payload: response,
+      loading: true,
+    });
+  } catch (e) {
+    dispatch({
+      type: GET_ERROR,
+      payload: "Error  " + e,
+    });
+  }
+};
+
+// get one product with id
+export const getOneProduct = (id) => async (dispatch) => {
+  try {
+    const response = await useGetData(`/api/v1/products/${id}`);
+    dispatch({
+      type: GET_PRODUCT_DETAILS,
       payload: response,
       loading: true,
     });

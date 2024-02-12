@@ -10,6 +10,8 @@ const ViewHomeProductsHook = () => {
 
   const allproducts = useSelector((state) => state.allProudacts.allProducts);
   //   if (allproducts.data) console.log(allproducts.data);
+
+  // if back empty handle it & slice it to return first 4 items
   let items = [];
   if (allproducts.data) {
     items = allproducts.data.slice(0, 4);
